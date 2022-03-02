@@ -1,4 +1,4 @@
-#JS-Billiards (name pending)
+# JS-Billiards (name pending)
 
 Until I come up with a better name, JS-Billiards is a browser implementation of pool written in Javascript. JS-Billiards includes the standard 8-ball and 9-ball variations of pool, but will also include a couple of fun game modes: Pool with Powers and Chaos Pool. 
 
