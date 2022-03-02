@@ -12,6 +12,6 @@ Fun fact: the names *billiards* and *pool* are generally used interchangeably th
 
 <b>Chaos Pool</b> will only allow you to select direction. Power and spin will be randomized. 
 
-### Timeline
+## Timeline
 ##### Day 1
 I used canvas to set up a very simple table with balls just to get the physics down. I followed [this tutorial](https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics) to get the ball rolling (ha!). 
