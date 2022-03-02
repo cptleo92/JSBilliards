@@ -14,4 +14,4 @@ Fun fact: the names *billiards* and *pool* are generally used interchangeably th
 
 ## Timeline
 ##### Day 1
-I used canvas to set up a very simple table with balls just to get the physics down. I followed [this tutorial](https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics) to get the ball rolling (ha!). 
+I used canvas to set up a very simple table with balls just to get the physics down. I followed [this tutorial](https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics) to get the ball rolling (ha!). Art found [here](https://opengameart.org/content/8-ball-pool-assets).
