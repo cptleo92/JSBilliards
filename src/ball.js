@@ -12,6 +12,10 @@ class Ball {
     this.pos = pos;
     this.vel = vel;
 
+    this.img = new Image();
+    this.img.src = `../src/assets/images/ball_${this.num}.png`
+
+    this.wallCollided = false;
   }
   
   getColor(num) {
@@ -34,30 +38,18 @@ class Ball {
     }
   }
 
-  draw(ctx) {    
-    ctx.beginPath();
-    ctx.arc(this.pos[0], this.pos[1], this.radius, 0, Math.PI * 2);
-
-    ctx.fillStyle = this.color;
-    ctx.fill();
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.font = '12px sans serif'
-    ctx.fillStyle = "black";
-    ctx.fillText(this.num, this.pos[0], this.pos[1] + 4);     
-    ctx.textAlign = "center";
+  draw(ctx) {           
+    ctx.drawImage(this.img, this.pos[0] - 15, this.pos[1] - 15, this.radius * 2, this.radius * 2);   
   }
 
   move(timeDelta) {
-    const velScale = timeDelta / (1000 / 60);
+    const velScale = timeDelta / (1000 / 40);
     let x = this.pos[0];
     let y = this.pos[1];
     let dx = this.vel[0] * velScale;
     let dy = this.vel[1] * velScale;
 
-    this.pos = [x + dx, y + dy];
-    this.collideEdge();
+    this.pos = [x + dx, y + dy]; 
     
     if (dx !== 0) {
       Math.abs(dx) < .1 ? this.vel[0] = 0 : this.vel[0] *= .99;
@@ -68,29 +60,28 @@ class Ball {
     }
   }
 
-  collideEdge() {
-    let x = this.pos[0];
-    let y = this.pos[1];
+  collideEdge(wall) {
+    let vx = this.vel[0];
+    let vy = this.vel[1];
 
-    if (x < 15) {
-      this.pos[0] = 15;
-      this.vel[0] *= -1;      
+    if (this.wallCollided === false) {
+      if (wall.type === 'horizontal') {
+        this.vel = [vx, -vy];
+      } else if (wall.type === 'vertical') {
+        this.vel = [-vx, vy];
+      } else if (wall.type === '1-diag') {
+        this.vel = [-vy, -vx];
+      } else if (wall.type === '2-diag') {
+        this.vel = [vy, vx];
+      } else if (wall.type === '3-diag') {
+        this.vel = []
+      }
+      this.wallCollided = true;
     }
 
-    if (x > 1185) {
-      this.pos[0] = 1185;
-      this.vel[0] *= -1;    
-    }
-
-    if (y < 15) {
-      this.pos[1] = 15;
-      this.vel[1] *= -1;      
-    }
-
-    if (y > 585) {
-      this.pos[1] = 585;
-      this.vel[1] *= -1;
-    }
+    setTimeout( () => {
+      this.wallCollided = false;
+    }, 100)
   }  
 }
 
