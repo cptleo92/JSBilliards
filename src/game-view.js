@@ -16,15 +16,14 @@ class GameView {
     this.game.moveBalls(timeDelta);
     this.game.detectCollisions();
     this.game.detectWallCollisions();
+    this.game.detectPocketed();
     this.draw();
     this.lastTime = time;
     window.requestAnimationFrame(this.animate.bind(this));
   }    
 
   draw () {   
-    this.game.table.draw(this.ctx);
-    // this.game.table.walls.forEach( (wall) => { wall.draw(this.ctx) } );
-    // this.game.table.balls.forEach( (ball) => { ball.draw(this.ctx) } )   
+    this.game.table.draw(this.ctx);      
   }
 }
 

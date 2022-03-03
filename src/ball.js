@@ -1,33 +1,29 @@
 const Util = require("./util");
 
-const RADIUS = 15;
-const COLORS = ["yellow", "blue", "red", "purple", "orange", "green", "maroon"]
+const RADIUS = 18;
 
 class Ball {
-  constructor (num, pos, vel = [0,0]) {
+  constructor (num) {
     this.num = num;
-    this.color = this.getColor(num);
     this.type = this.getType(num);
     this.radius = RADIUS;
-    this.pos = pos;
-    this.vel = vel;
-
+    this.size = this.radius * 2;
+    this.pos = [0,0];
+    this.vel = [0,0];
     this.img = new Image();
     this.img.src = `../src/assets/images/ball_${this.num}.png`
-
     this.wallCollided = false;
+    this.onTable = true;
+    this.isStationary = (this.vel[0] === 0 && this.vel[1] === 0); 
+    this.sinking = false;
   }
-  
-  getColor(num) {
-    if (num < 8 && num !== 0) {
-      return COLORS[num - 1];
-    } else if (num > 8) {
-      return COLORS[num - 9];
-    } else if (num === 8) {
-      return "black";
-    } else {
-      return "white";
-    }
+
+  resetBall() {
+    this.vel[0] = 0;
+    this.vel[1] = 0;
+    this.size = this.radius * 2;
+    this.onTable = true;
+    this.sinking = false;
   }
 
   getType(num) {
@@ -35,15 +31,25 @@ class Ball {
       return "solid";
     } else if (num > 8) {
       return "stripe";
+    } else if (num === 0) {
+      return "white"
+    } else if (num === 8) {
+      return "eight"
     }
   }
 
-  draw(ctx) {           
-    ctx.drawImage(this.img, this.pos[0] - 15, this.pos[1] - 15, this.radius * 2, this.radius * 2);   
+  draw(ctx) {      
+    if (this.onTable) {     
+      ctx.drawImage(this.img, this.pos[0] - this.radius, this.pos[1] - this.radius, this.size, this.size);   
+    }
+
+    if (this.sinking && this.size >= 0) {
+      ctx.drawImage(this.img, this.pos[0] - this.radius, this.pos[1] - this.radius, this.size--, this.size--);
+    }
   }
 
   move(timeDelta) {
-    const velScale = timeDelta / (1000 / 40);
+    const velScale = timeDelta / (25);
     let x = this.pos[0];
     let y = this.pos[1];
     let dx = this.vel[0] * velScale;
@@ -63,8 +69,9 @@ class Ball {
   collideEdge(wall) {
     let vx = this.vel[0];
     let vy = this.vel[1];
+    let notCollided = true;
 
-    if (this.wallCollided === false) {
+    if (notCollided) {
       if (wall.type === 'horizontal') {
         this.vel = [vx, -vy];
       } else if (wall.type === 'vertical') {
@@ -73,16 +80,33 @@ class Ball {
         this.vel = [-vy, -vx];
       } else if (wall.type === '2-diag') {
         this.vel = [vy, vx];
-      } else if (wall.type === '3-diag') {
-        this.vel = []
-      }
-      this.wallCollided = true;
+      } 
+      notCollided = false;
     }
 
     setTimeout( () => {
-      this.wallCollided = false;
-    }, 100)
+      notCollided = true;
+    }, 100);
+      
+    //fix pos to avoid sticking onto walls
+    let buffer = 3;
+    if (wall.location === 'top') {
+      this.pos[1] += buffer;
+    } else if (wall.location === 'bottom') {
+      this.pos[1] -= buffer;
+    } else if (wall.location === 'left') {
+      this.pos[0] += buffer;
+    } else if (wall.location === 'right') {
+      this.pos[0] -= buffer;
+    }
   }  
+
+  sink() {
+    this.onTable = false;
+    this.vel[0] = 0;
+    this.vel[1] = 0;
+    this.sinking = true;    
+  }
 }
 
 module.exports = Ball;

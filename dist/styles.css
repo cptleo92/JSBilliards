@@ -12,3 +12,12 @@ h1 {
   margin: auto;
   /* border: 5px solid black; */
 }
+
+.info {
+  width: 1400px;
+  height: 500px;
+  display: block;
+  position: relative;
+  margin: auto;
+  border: 5px solid black;
+}
