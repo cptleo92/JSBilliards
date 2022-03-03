@@ -7,18 +7,23 @@ class CueBall extends Ball {
     super(0);
 
     this.ballInHand = true;
-    this.behindTheLine = true;   
-    this.canBeHit = false;    
+    this.behindTheLine = true;      
+    this.canBeHit = false;
     this.canvas = document.getElementById("table");
 
     this.init();    
+
+    // setInterval( () => {
+    //   console.log(this);
+    // }, 500)
   }
 
   init() {
     this.handleBallInHand();  
+    this.bindClickToHit();   
   }
   
-  handleBallInHand() {    
+  handleBallInHand() {
     const placeBall = function(e) {
       let [x, y] = Util.getCursorPos(e);
       this.vel[0] = 0;
@@ -30,37 +35,39 @@ class CueBall extends Ball {
       } else {
         this.pos[0] = x;
         this.pos[1] = y;   
-      }      
-
-      this.canvas.addEventListener("click", e => {
-        this.ballInHand = false;
-        this.canBeHit = true;    
+      }  
+      
+      this.canvas.addEventListener("click", () => {    
+        this.ballInHand = false;        
         this.behindTheLine = false;
-        this.canvas.removeEventListener("mousemove", placeBall);
-        this.bindClickToHit();
+        this.canBeHit = true;
+        this.canvas.removeEventListener("mousemove", placeBall);             
       })           
     }.bind(this);
     
     this.canvas.addEventListener("mousemove", placeBall)  
+    
   }    
 
-  bindClickToHit() {  
-    const cue = this;
-    if (this.canBeHit) {
-      this.canvas.addEventListener("click", e => {
-        // console.log(this.getCursorPos(canvas, e)); 
-        let [x, y] = Util.getCursorPos(e);                    
-        let cx = cue.pos[0];
-        let cy = cue.pos[1];
-        let vec = [(x - cx) / 100, (y - cy) / 100]      
-        let power = Math.log(Util.getPointDistance(x, y, cx, cy));    
-        let vel = [vec[0] * power, vec[1] * power]
-        
-        if (cue.vel[0] === 0 && cue.vel[1] === 0) {
-          cue.hitCue(vel);      
-        }
-      });
-    }
+  bindClickToHit() {      
+    this.canvas.addEventListener("click", e => {      
+      if (this.canBeHit) {
+        this.calcHit(e);       
+      };
+    }); 
+  }
+
+  calcHit(e) {
+    // console.log(this.getCursorPos(canvas, e)); 
+    let [x, y] = Util.getCursorPos(e);                    
+    let cx = this.pos[0];
+    let cy = this.pos[1];
+    let vec = [(x - cx) / 100, (y - cy) / 100]      
+    let power = Math.log(Util.getPointDistance(x, y, cx, cy));    
+    let vel = [vec[0] * power, vec[1] * power]   
+  
+    this.hitCue(vel);      
+  
   }
 
   hitCue(vel) {    
@@ -76,6 +83,8 @@ class CueBall extends Ball {
   }
 
   handleScratch() {
+    this.ballInHand = true;
+    this.canBeHit = false;
     this.resetBall();
     this.handleBallInHand();  
   }

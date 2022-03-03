@@ -12,12 +12,5 @@ document.addEventListener("DOMContentLoaded", event => {
 
   let game = new Game(canvas, ctx);
   let gameView = new GameView(game, ctx);
-  gameView.draw(); 
-
-  document.addEventListener("keydown", event => {
-    if (event.key === "Tab") {
-      game.table.resetTable();
-    }
-  })
-
+ 
 })

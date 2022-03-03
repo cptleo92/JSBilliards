@@ -11,14 +11,21 @@ class Game {
     this.cue = this.table.balls[0];
     this.ctx = ctx;
   }
+
+  update(timeDelta) {
+    this.moveBalls(timeDelta);
+    this.detectCollisions();
+    this.detectWallCollisions();
+    this.detectPocketed();
+  }
+
   moveBalls(timeDelta) {
     this.balls.forEach( ball1 => {
       ball1.move(timeDelta);        
     })
   }
 
-  detectCollisions() {   
-    
+  detectCollisions() {       
     let obj1;
     let obj2;    
     let colDist = this.cue.radius * 2.1;
@@ -77,6 +84,7 @@ class Game {
     for (let i = 0; i < 16; i++) {
       let ball = this.balls[i];      
       if (!ball.onTable && ball.isStationary) {continue}
+      if (ball instanceof CueBall && ball.ballInHand) {continue}
 
       for (let j = 0; j < 6; j++) {
         let pocket = this.pockets[j];

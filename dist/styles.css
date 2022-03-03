@@ -7,8 +7,9 @@ h1 {
 }
 
 #table {
-  display: block;
-  position: relative;
+  background-image: url("../src/assets/images/table.png");
+  background-size: 1400px 700px;
+  display: block; 
   margin: auto;
   /* border: 5px solid black; */
 }
@@ -17,7 +18,19 @@ h1 {
   width: 1400px;
   height: 500px;
   display: block;
-  position: relative;
-  margin: auto;
+  margin: auto; 
   border: 5px solid black;
+}
+
+.info button { 
+  background-color: #4CAF50; /* Green */
+  border-radius: 5px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 10px auto;
 }

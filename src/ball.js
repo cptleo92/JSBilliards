@@ -40,7 +40,7 @@ class Ball {
 
   draw(ctx) {      
     if (this.onTable) {     
-      ctx.drawImage(this.img, this.pos[0] - this.radius, this.pos[1] - this.radius, this.size, this.size);   
+      ctx.drawImage(this.img, this.pos[0] - this.radius, this.pos[1] - this.radius, this.size, this.size);
     }
 
     if (this.sinking && this.size >= 0) {

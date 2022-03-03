@@ -17,9 +17,6 @@ class Table {
 
     this.width = canvas.width;
     this.height = this.width / 2;
-
-    this.img = new Image();
-    this.img.src = "../src/assets/images/table.png"
   }
 
   generateBalls () {
@@ -27,7 +24,7 @@ class Table {
     for(let i = 0; i <= 15; i++) {
       let ball;
       if (i === 0) {
-        ball = new CueBall(i);
+        ball = new CueBall();
         balls.push(ball);
       } else {
         ball = new Ball(i);
@@ -37,21 +34,14 @@ class Table {
     return balls;
   }
 
-  draw(ctx) {     
-    ctx.drawImage(this.img, 0, 0, this.width, this.height);   
-    this.balls.forEach( (ball) => { ball.draw(this.ctx) } );     
-    // this.pockets.forEach( (pocket) => { pocket.draw(this.ctx) } ); 
-  }
-
   resetTable() {
-    for (const ball of this.balls) {
+    for (const ball of this.balls) {   
       ball.resetBall();
     }
     this.positionBalls();
   }
 
-  positionBalls () {     
-
+  positionBalls () { 
     let x = 375;
     let y = 325;
     this.balls[0].pos = [1050, y];
