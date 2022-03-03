@@ -15,3 +15,6 @@ Fun fact: the names *billiards* and *pool* are generally used interchangeably th
 ## Timeline
 ##### Day 1
 I used canvas to set up a very simple table with balls just to get the physics down. I followed [this tutorial](https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics) to get the ball rolling (ha!). Art found [here](https://opengameart.org/content/8-ball-pool-assets).
+
+##### Day 2
+Still working on collision. Math is hard! I found [this resource](http://www.jeffreythompson.org/collision-detection/table_of_contents.php) which ended up being immensely helpful. Still running into the issue where if an object moves too fast it "jumps" over a potential collision. 
