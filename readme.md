@@ -18,3 +18,6 @@ I used canvas to set up a very simple table with balls just to get the physics d
 
 ##### Day 2
 Still working on collision. Math is hard! I found [this resource](http://www.jeffreythompson.org/collision-detection/table_of_contents.php) which ended up being immensely helpful. Still running into the issue where if an object moves too fast it "jumps" over a potential collision. 
+
+##### Day 3-4
+Leaving collision alone for now to get the main game loop done. Apart from dropped frames and weird collisions/edge cases, this is now a fully functional game of pool! 

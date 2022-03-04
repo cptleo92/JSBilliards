@@ -36,7 +36,7 @@ class CueBall extends Ball {
         this.behindTheLine = false;
         this.canBeHit = true;
         this.canvas.removeEventListener("mousemove", placeBall);             
-      })           
+      }, {once: true})           
     }.bind(this);
 
     this.canvas.addEventListener("mousemove", placeBall)    
