@@ -17,8 +17,8 @@ class Ball {
     this.img = new Image();    
     // this.img.onload = () => {
     //   this.tempCtx.drawImage(this.img, 0, 0, this.size, this.size)
-    // }
-    this.img.src = `./src/assets/images/ball_${this.num}.png`
+    // 
+    this.img.src = `./assets/images/ball_${this.num}.png`
 
     // this.init();
   }
