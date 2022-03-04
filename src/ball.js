@@ -10,11 +10,24 @@ class Ball {
     this.size = this.radius * 2;
     this.pos = [0,0];
     this.vel = [0,0];
-    this.img = new Image();
-    this.img.src = `../src/assets/images/ball_${this.num}.png`
     this.wallCollided = false;
     this.onTable = true; 
     this.sinking = false;
+
+    this.img = new Image();    
+    // this.img.onload = () => {
+    //   this.tempCtx.drawImage(this.img, 0, 0, this.size, this.size)
+    // }
+    this.img.src = `../src/assets/images/ball_${this.num}.png`
+
+    // this.init();
+  }
+
+  init() {
+    // this.tempCanvas = document.createElement('canvas');
+    // this.tempCanvas.width = this.size;
+    // this.tempCanvas.height = this.size;
+    // this.tempCtx = this.tempCanvas.getContext('2d');    
   }
 
   isStationary() {
@@ -43,7 +56,12 @@ class Ball {
 
   draw(ctx) {      
     if (this.onTable) {     
-      ctx.drawImage(this.img, this.pos[0] - this.radius, this.pos[1] - this.radius, this.size, this.size);
+      ctx.drawImage(this.img, 
+        Math.round(this.pos[0] - this.radius), 
+        Math.round(this.pos[1] - this.radius),
+        this.size,
+        this.size
+      );
     }
 
     if (this.sinking && this.size >= 0) {
@@ -67,6 +85,15 @@ class Ball {
     if (dy !== 0) {
       Math.abs(dy) < .1 ? this.vel[1] = 0 : this.vel[1] *= .99;
     }
+
+    if ((x > 1325 || x < 65) || (y < 50 || y > 650)) {
+      this.resetBall();
+      this.pos = [
+        Math.floor(Math.random() * 1100) + 300, 
+        Math.floor(Math.random() * 500) + 100, 
+        ];
+    } 
+    
   }
 
   collideEdge(wall) {

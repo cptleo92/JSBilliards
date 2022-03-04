@@ -34,6 +34,10 @@ const Util = {
     const x = (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width
     const y = (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
     return [x, y];
+  },
+
+  clamp: function (val, min, max) {
+    return val > max ? max : val < min ? min : val;
   }
 }
 

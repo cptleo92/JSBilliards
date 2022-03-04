@@ -21,6 +21,15 @@ class Table {
 
     this.solidSection = document.querySelector(".info-bottom-left");
     this.stripeSection = document.querySelector(".info-bottom-right");
+
+    // this.test();
+  }
+
+  test() {
+    for (let i = 1; i <= 5; i++) {
+      this.balls[i].sink();
+      this.pocketed.push(this.balls[i]);
+    }
   }
 
   generateBalls () {

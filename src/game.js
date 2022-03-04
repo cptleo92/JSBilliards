@@ -55,6 +55,12 @@ class Game {
   }
 
   endOfTurn() {
+    let checkBalls = this.table.pocketed.filter(ball => ball.type === this.currentPlayer.ballType)
+    if (checkBalls.length === 7) {
+      this.currentPlayer.lastBall = true
+      console.log(`Player ${this.currentPlayer.num} is on the 8!`)
+    };
+
     if (!this.balls[8].onTable) {
       this.gameOver();
     }
@@ -69,19 +75,14 @@ class Game {
 
         if (this.openBreak && type !== 'white') {
           this.assignType(type);
-          this.openBreak = false;    
-          console.log('no open no mo');
+          this.openBreak = false;           
           this.resolveTurn(false);    
-        } else if (type !== this.currentPlayer.ballType) {
-          console.log('switching players because the wrong ball went in')
-          console.log(this.currentPlayer.ballType);
+        } else if (type !== this.currentPlayer.ballType) {          
           this.resolveTurn(true);
         } else {
-          console.log('stay the same player');
           this.resolveTurn(false);
         }
     } else {
-      console.log('nothing went in');
       this.resolveTurn(true);
     }   
   }
@@ -146,15 +147,15 @@ class Game {
         if (Util.getDistance(obj1, obj2) <= colDist) {              
           Util.ballCollisionMath(obj1, obj2);
 
-          if (obj1 instanceof CueBall && !this.firstBallHit) {
-            this.firstBallHit = obj2;            
+          if (obj1 instanceof CueBall && !this.firstBallHit && !obj1.ballInHand) {
+            this.firstBallHit = obj2;          
           }
 
         } 
         
       }
     }   
-  }
+  }  
 
   detectWallCollisions() {
     for (let i = 0; i < 16; i++) {
@@ -222,22 +223,25 @@ class Game {
   checkScratch() {
     if (this.firstBallHit === null) {
       this.scratched = true;
-    } else if ((this.currentPlayer.ballType !== this.firstBallHit.type && !this.openBreak) || this.firstBallHit.type === 'eight') {
-      console.log('SCRATCH!')
-      console.log(`Player: ${this.currentPlayer.ballType}, contact: ${this.firstBallHit.type}`);
-      this.scratched = true;      
+    } else if (this.firstBallHit.type === 'eight') {
+      if (!this.currentPlayer.lastBall) {
+        this.scratched = true;
+      }
+    } else {
+      if (this.currentPlayer.ballType !== this.firstBallHit.type && !this.openBreak) {  
+        this.scratched = true;      
+      }  
     }
   }
 
   gameOver() {
     let type = this.currentPlayer.ballType;
-    let checkBalls = this.balls.filter( ball => {
-      ball.type === type && !ball.onTable;
-    })
-    if (checkBalls.length === 7) {
-      console.log(`Player ${this.currentPlayer.num} wins!`)
+    let checkBalls = this.table.pocketed.filter( ball => ball.type === type );
+    console.log(checkBalls);
+    if (checkBalls.length === 7 && !this.scratched) {
+      alert(`Player ${this.currentPlayer.num} wins!`)
     } else {
-      console.log(`Player ${this.currentPlayer.num} sank the 8 too early and loses!`)
+      alert(`Player ${this.currentPlayer.num} loses!`)
     }   
   }
 }
