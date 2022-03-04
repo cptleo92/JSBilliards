@@ -24,11 +24,11 @@ class CueBall extends Ball {
       this.vel[1] = 0;
 
       if (this.behindTheLine) {
-        this.pos[0] = Util.clamp(x, 1040, 1325);
-        this.pos[1] = Util.clamp(y, 80, 630);   
+        this.pos[0] = Util.clamp(x, 890, 1125);
+        this.pos[1] = Util.clamp(y, 80, 530);   
       } else {
-        this.pos[0] = Util.clamp(x, 65, 1325);
-        this.pos[1] = Util.clamp(y, 80, 630);  
+        this.pos[0] = Util.clamp(x, 65, 1125);
+        this.pos[1] = Util.clamp(y, 80, 530);  
       }  
       
       this.canvas.addEventListener("click", () => {    

@@ -13,13 +13,13 @@ class Wall {
     this.location = location;
   }
 
-  // draw(ctx) {
-  //   ctx.moveTo(this.x1, this.y1);
-  //   ctx.lineTo(this.x2, this.y2);
-  //   ctx.strokeStyle = this.color;
-  //   ctx.lineWidth = 3;
-  //   ctx.stroke();    
-  // }
+  draw(ctx) {
+    ctx.moveTo(this.x1, this.y1);
+    ctx.lineTo(this.x2, this.y2);
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth = 3;
+    ctx.stroke();    
+  }
 
   isPointCollide(x, y) {
     let dist1 = Util.getPointDistance(this.x1, this.y1, x, y);

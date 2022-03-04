@@ -1,6 +1,6 @@
 const Util = require("./util");
 
-const RADIUS = 18;
+const RADIUS = 15;
 
 class Ball {
   constructor (num) {
@@ -79,11 +79,11 @@ class Ball {
     this.pos = [x + dx, y + dy]; 
     
     if (dx !== 0) {
-      Math.abs(dx) < .1 ? this.vel[0] = 0 : this.vel[0] *= .99;
+      Math.abs(dx) < .1 ? this.vel[0] = 0 : this.vel[0] *= .992;
     }
 
     if (dy !== 0) {
-      Math.abs(dy) < .1 ? this.vel[1] = 0 : this.vel[1] *= .99;
+      Math.abs(dy) < .1 ? this.vel[1] = 0 : this.vel[1] *= .992;
     }
 
     if ((x > 1325 || x < 65) || (y < 50 || y > 650)) {

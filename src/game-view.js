@@ -28,7 +28,8 @@ class GameView {
 
   draw () {   
     this.ctx.clearRect(0, 0, this.table.width, this.table.height);
-    this.game.table.balls.forEach( (ball) => { ball.draw(this.ctx) } );
+    this.game.table.balls.forEach( (ball) => ball.draw(this.ctx));
+    // this.game.table.pockets.forEach( (pocket) => pocket.draw(this.ctx))
     this.game.table.drawPocketed();       
   }
 

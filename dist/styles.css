@@ -8,7 +8,7 @@ h1 {
 
 #table {
   background-image: url("../src/assets/images/table.png");
-  background-size: 1400px 700px;
+  background-size: 1200px 600px;
   display: block; 
   margin: auto;
   margin-bottom: 20px;
@@ -16,12 +16,12 @@ h1 {
 }
 
 .info {
-  width: 1400px;
-  height: 495px;
+  width: 1200px;
+  height: 250px;
   display: flex;
   flex-direction: column;
   margin: auto; 
-  border: 5px solid black;
+  border: 10px solid black;
 }
 
 .info-top {
@@ -31,20 +31,19 @@ h1 {
 .info-bottom {
   display: flex;
   width: auto;
-  height: 400px;
+  height: 250px;
   justify-content: space-between;
   /* background-color: red; */
 }
 
 .info-bottom img { 
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
 }
 
 .info-bottom-left {
   display: flex;
   width: 500px;
-  height: 400px;
   padding: 20px;  
   border-right: 3px solid black;
 }
@@ -52,7 +51,6 @@ h1 {
 .info-bottom-right {
   display: flex;
   width: 500px;
-  height: 400px;
   padding: 20px;  
   border-left: 3px solid black;
 }
