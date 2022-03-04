@@ -7,17 +7,15 @@ class GameView {
     this.ctx = ctx;
     this.lastTime = 0;       
 
+    this.info = document.querySelector(".info");
+
     this.init();  
   }
 
   init() {
     requestAnimationFrame(this.animate.bind(this))
-
-    const info = document.querySelector(".info");
-    const reset = document.createElement("button");   
-    reset.innerHTML = "Reset Table";
-    info.appendChild(reset);
-    this.bindReset(reset);
+  
+    // this.resetButton();
   }
 
   animate(time) {
@@ -30,14 +28,20 @@ class GameView {
 
   draw () {   
     this.ctx.clearRect(0, 0, this.table.width, this.table.height);
-    this.game.table.balls.forEach( (ball) => { ball.draw(this.ctx) } );      
+    this.game.table.balls.forEach( (ball) => { ball.draw(this.ctx) } );
+    this.game.table.drawPocketed();       
   }
 
-  bindReset(btn) {
-    btn.addEventListener("click", () => {
+  resetButton() {    
+    const reset = document.createElement("button");   
+    reset.innerHTML = "Reset Table";
+    this.info.appendChild(reset);
+
+    reset.addEventListener("click", () => {
       this.table.resetTable();
     })
   }
+
 }
 
 module.exports = GameView;

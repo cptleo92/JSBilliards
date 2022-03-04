@@ -12,18 +12,16 @@ class CueBall extends Ball {
     this.canvas = document.getElementById("table");
 
     this.init();    
-
-    // setInterval( () => {
-    //   console.log(this);
-    // }, 500)
   }
 
   init() {
     this.handleBallInHand();  
-    this.bindClickToHit();   
   }
   
   handleBallInHand() {
+    this.canBeHit = false;
+    this.ballInHand = true;
+
     const placeBall = function(e) {
       let [x, y] = Util.getCursorPos(e);
       this.vel[0] = 0;
@@ -44,18 +42,9 @@ class CueBall extends Ball {
         this.canvas.removeEventListener("mousemove", placeBall);             
       })           
     }.bind(this);
-    
-    this.canvas.addEventListener("mousemove", placeBall)  
-    
-  }    
 
-  bindClickToHit() {      
-    this.canvas.addEventListener("click", e => {      
-      if (this.canBeHit) {
-        this.calcHit(e);       
-      };
-    }); 
-  }
+    this.canvas.addEventListener("mousemove", placeBall)    
+  }      
 
   calcHit(e) {
     // console.log(this.getCursorPos(canvas, e)); 
@@ -82,9 +71,7 @@ class CueBall extends Ball {
     })  
   }
 
-  handleScratch() {
-    this.ballInHand = true;
-    this.canBeHit = false;
+  handleScratch() {    
     this.resetBall();
     this.handleBallInHand();  
   }

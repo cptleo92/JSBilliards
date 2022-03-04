@@ -13,11 +13,14 @@ class Ball {
     this.img = new Image();
     this.img.src = `../src/assets/images/ball_${this.num}.png`
     this.wallCollided = false;
-    this.onTable = true;
-    this.isStationary = (this.vel[0] === 0 && this.vel[1] === 0); 
+    this.onTable = true; 
     this.sinking = false;
   }
 
+  isStationary() {
+    return (this.vel[0] === 0 && this.vel[1] === 0);
+  }
+  
   resetBall() {
     this.vel[0] = 0;
     this.vel[1] = 0;
@@ -27,12 +30,12 @@ class Ball {
   }
 
   getType(num) {
-    if (num < 8) {
+    if (num === 0) {
+      return "white"
+    } else if (num < 8) {
       return "solid";
     } else if (num > 8) {
       return "stripe";
-    } else if (num === 0) {
-      return "white"
     } else if (num === 8) {
       return "eight"
     }

@@ -14,9 +14,13 @@ class Table {
     this.walls = this.generateWalls();
     
     this.pockets = this.generatePockets();
+    this.pocketed = [];
 
     this.width = canvas.width;
     this.height = this.width / 2;
+
+    this.solidSection = document.querySelector(".info-bottom-left");
+    this.stripeSection = document.querySelector(".info-bottom-right");
   }
 
   generateBalls () {
@@ -33,10 +37,21 @@ class Table {
     }    
     return balls;
   }
+  
+  drawPocketed() {
+    this.pocketed.forEach( ball => {
+      if (ball.type === 'solid') {
+        this.solidSection.appendChild(ball.img);
+      } else {
+        this.stripeSection.appendChild(ball.img);
+      }
+    })
+  }
 
   resetTable() {
-    for (const ball of this.balls) {   
+    for (const ball of this.balls) {         
       ball.resetBall();
+      if (ball instanceof CueBall) {ball.handleBallInHand()}
     }
     this.positionBalls();
   }
@@ -50,24 +65,31 @@ class Table {
     let d = (r * 2) ;
     
     this.balls[1].pos = [x, y];
-
-    this.balls[2].pos = [x - d, y - r];
-    this.balls[3].pos = [x - d, y + r];
-
-    this.balls[4].pos = [x - (d * 2), y - d];
     this.balls[8].pos = [x - (d * 2), y];
-    this.balls[5].pos = [x - (d * 2), y + d];
 
-    this.balls[6].pos = [x - (d * 3), y + r];
-    this.balls[7].pos = [x - (d * 3), y + (d + r)];   
-    this.balls[9].pos = [x - (d * 3), y - (d + r)];
-    this.balls[10].pos = [x - (d * 3), y - r];
+    const POSITIONS = [
+      [x - d, y - r], 
+      [x - d, y + r],
+      [x - (d * 2), y - d],
+      [x - (d * 2), y + d],
+      [x - (d * 3), y + r],
+      [x - (d * 3), y + (d + r)],
+      [x - (d * 3), y - (d + r)],
+      [x - (d * 3), y - r],
+      [x - (d * 4), y - d],
+      [x - (d * 4), y],
+      [x - (d * 4), y + d],
+      [x - (d * 4), y + (d * 2)],
+      [x - (d * 4), y - (d * 2)]
+    ]
 
-    this.balls[11].pos = [x - (d * 4), y - d];
-    this.balls[12].pos = [x - (d * 4), y];
-    this.balls[13].pos = [x - (d * 4), y + d];
-    this.balls[14].pos = [x - (d * 4), y + (d * 2)];
-    this.balls[15].pos = [x - (d * 4), y - (d * 2)];
+    const REMAINING = [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15];
+
+    for(let i = 0; i < 13; i++) {
+      let idx = Math.floor(Math.random() * REMAINING.length);
+      this.balls[REMAINING[idx]].pos = POSITIONS[i];
+      REMAINING.splice(idx, 1); 
+    }
   }
 
   generateWalls() {
