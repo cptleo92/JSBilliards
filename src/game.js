@@ -2,6 +2,7 @@ const Player = require("./player.js");
 const Table = require("./table.js");
 const Util = require("./util.js")
 const CueBall = require("./cue_ball.js");
+const Stick = require("./stick.js")
 
 class Game {
   constructor (canvas, ctx) {
@@ -22,6 +23,8 @@ class Game {
     this.firstBallHit = null;
     this.scratched = false;
 
+    this.stick = new Stick(this.canvas);
+
     this.play();
     this.updateTracker();
   }
@@ -30,7 +33,8 @@ class Game {
     const clickToHit = (e) => {  
       if (this.cue.canBeHit && this.waitForHit) {
         this.cue.calcHit(e);
-        this.waitForHit = false;      
+        this.waitForHit = false;    
+        this.stick.visible = false;  
       };
     }      
     this.canvas.addEventListener("click", clickToHit);    
@@ -94,6 +98,8 @@ class Game {
     this.scratched = false
     if (switchPlayer) {this.switchTurn()};
     this.updateTracker();
+
+    this.stick.visible = true;
   }
 
   switchTurn() {

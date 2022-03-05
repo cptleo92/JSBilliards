@@ -1,4 +1,5 @@
-const Game = require("./game.js")
+const Stick = require("./stick.js")
+const Util = require("./util.js");
 
 class GameView {
   constructor(game, ctx) {
@@ -7,15 +8,12 @@ class GameView {
     this.ctx = ctx;
     this.lastTime = 0;       
 
-    this.info = document.querySelector(".info");
-
+    this.info = document.querySelector(".info");    
     this.init();  
   }
 
   init() {
     requestAnimationFrame(this.animate.bind(this))
-  
-    // this.resetButton();
   }
 
   animate(time) {
@@ -30,7 +28,11 @@ class GameView {
     this.ctx.clearRect(0, 0, this.table.width, this.table.height);
     this.game.table.balls.forEach( (ball) => ball.draw(this.ctx));
     // this.game.table.pockets.forEach( (pocket) => pocket.draw(this.ctx))
-    this.game.table.drawPocketed();       
+    this.game.table.drawPocketed();
+    
+    if (!this.game.cue.ballInHand) {
+      this.game.stick.draw(this.ctx, this.game.cue);
+    }
   }
 
   resetButton() {    

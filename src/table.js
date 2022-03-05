@@ -20,7 +20,7 @@ class Table {
     this.height = this.width / 2;
 
     this.solidSection = document.querySelector(".info-bottom-left");
-    this.stripeSection = document.querySelector(".info-bottom-right");
+    this.stripeSection = document.querySelector(".info-bottom-right"); 
 
     // this.test();
   }

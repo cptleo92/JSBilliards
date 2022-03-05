@@ -47,7 +47,7 @@ class CueBall extends Ball {
     let [x, y] = Util.getCursorPos(e);                    
     let cx = this.pos[0];
     let cy = this.pos[1];
-    let vec = [(x - cx) / 100, (y - cy) / 100]      
+    let vec = [(x - cx) / -100, (y - cy) / -100]      
     let power = Math.log(Util.getPointDistance(x, y, cx, cy));    
     let vel = [vec[0] * power, vec[1] * power]   
   
