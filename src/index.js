@@ -16,4 +16,5 @@ document.addEventListener("DOMContentLoaded", event => {
   document.addEventListener("click", e => {
     console.log(Util.getCursorPos(e));
   })
+  
 })

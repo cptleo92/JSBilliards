@@ -5,30 +5,45 @@ class Stick {
     this.img = new Image();
     this.img.src = 'src/assets/images/cue.png';
     this.visible = true;    
+    this.rotating = true;
+    this.shooting = false;
 
     this.canvas = document.getElementById("table");
     this.canvas.addEventListener("mousemove", e => {
-      [this.mouseX, this.mouseY] = Util.getCursorPos(e);
+      if (this.rotating) {      
+        [this.mouseX, this.mouseY] = Util.getCursorPos(e);
+      }
     })
   }
 
   draw(ctx, cue) {
+    let dist = 20 + (cue.power * 2);
+
     if (this.visible) {  
       let x = cue.pos[0];
       let y = cue.pos[1];
-      let offset = cue.radius / 2;
+      let offset = cue.radius / 2 + 3;
       let opposite = this.mouseY - y;
-      let adjacent = this.mouseX - x;
-      let dist = Util.getPointDistance(this.mouseX, this.mouseY, x, y);      
-
+      let adjacent = this.mouseX - x;    
       ctx.save();
       ctx.translate(x, y);        
-      // ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.rotate(Math.atan2(opposite - offset, adjacent));
+      ctx.rotate(Math.atan2((opposite) * -1, adjacent * -1));    
       ctx.translate(-x, -y);        
-      ctx.drawImage(this.img, x + Math.sqrt(dist * 10), y - offset);
+      ctx.drawImage(this.img, x + dist, y - offset);
       ctx.restore();
-    }   
+
+    //   if (this.shooting) {
+    //     if (dist >= 0) {
+    //       ctx.drawImage(this.img, x + dist, y - offset);
+    //       dist--;
+    //       console.log(dist);
+    //       if (dist <= 0) {
+    //         this.shooting = false;
+    //         this.visible = false;
+    //       }
+    //     }
+    //   }
+    }      
   }
 
 }

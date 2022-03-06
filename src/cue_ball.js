@@ -1,6 +1,6 @@
 const Util = require("./util");
 const Ball = require ("./ball.js");
-
+const Power = require("./power.js");
 
 class CueBall extends Ball {
   constructor() {
@@ -10,6 +10,8 @@ class CueBall extends Ball {
     this.behindTheLine = true;      
     this.canBeHit = false;
     this.canvas = document.getElementById("table");
+    this.ctx = this.canvas.getContext('2d');
+    this.power = 1;
 
     this.handleBallInHand();   
   }
@@ -42,26 +44,65 @@ class CueBall extends Ball {
     this.canvas.addEventListener("mousemove", placeBall)    
   }      
 
-  calcHit(e) {
-    // console.log(this.getCursorPos(canvas, e)); 
+  calcHit(e, callback) { 
     let [x, y] = Util.getCursorPos(e);                    
     let cx = this.pos[0];
     let cy = this.pos[1];
-    let vec = [(x - cx) / -100, (y - cy) / -100]      
-    let power = Math.log(Util.getPointDistance(x, y, cx, cy));    
-    let vel = [vec[0] * power, vec[1] * power]   
-  
-    this.hitCue(vel);      
-  
+    let dist = Util.getPointDistance(x, y, cx, cy);  
+    let vec = [(x - cx) / dist, (y - cy) / dist]      
+    // console.log(power);  
+    this.holdMouseForPower( (power) => {
+      let vel = [vec[0] * power, vec[1] * power]     
+      console.log('vec before power: ' + vec)
+      console.log('vel after power: ' + vel);
+      console.log('power: ' + power)
+      this.hitCue(vel, callback);          
+    });
+    
   }
 
-  hitCue(vel) {    
+  holdMouseForPower(callback) {   
+    let increasing = true; 
+    const minPower = 1;
+    const maxPower = 50;
+    const increment = 2;   
+    
+    const powerCounter = () => {
+      const interval = setInterval(() => {
+        if (this.power <= maxPower && increasing) {
+          this.power += increment;
+        } else {
+          increasing = false;
+        }
+        
+        if (this.power >= minPower && !increasing) {
+          this.power -= increment;
+        } else {
+          increasing = true;  
+        }
+      }, 50);      
+
+      const clearCounter = () => {
+        clearInterval(interval);
+        this.canvas.removeEventListener("mousedown", powerCounter);
+        callback(this.power);
+        this.power = 1;
+      }
+  
+      this.canvas.addEventListener("mouseup", clearCounter, {once: true});     
+    }
+    this.canvas.addEventListener("mousedown", powerCounter);
+  }
+
+  hitCue(vel, callback) {    
+    // console.log('hit cue');
     this.vel = vel.map( num => {
       if (num < -51) {
         return -50;
       } else if (num > 51) {
         return 50;
       } else {
+        callback();
         return num;
       }
     })  

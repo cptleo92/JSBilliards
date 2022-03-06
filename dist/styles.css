@@ -1,9 +1,10 @@
 body {
-  background-color: rgb(190, 186, 163);
+  background-color: rgb(67, 39, 83);
 }
 
-h1 {
-  text-align: center
+body {
+  text-align: center;
+  color: rgb(223, 219, 219);
 }
 
 #table {
@@ -12,7 +13,7 @@ h1 {
   display: block; 
   margin: auto;
   margin-bottom: 20px;
-  /* border: 5px solid black; */
+  /* border: 5px solid white; */
 }
 
 .info {
@@ -21,11 +22,11 @@ h1 {
   display: flex;
   flex-direction: column;
   margin: auto; 
-  border: 10px solid black;
+  border: 10px solid white;
 }
 
 .info-top {
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid white;
 }
 
 .info-bottom {
@@ -45,14 +46,14 @@ h1 {
   display: flex;
   width: 500px;
   padding: 20px;  
-  border-right: 3px solid black;
+  border-right: 3px solid white;
 }
 
 .info-bottom-right {
   display: flex;
   width: 500px;
   padding: 20px;  
-  border-left: 3px solid black;
+  border-left: 3px solid white;
 }
 
 .info button {
@@ -72,4 +73,10 @@ p {
   text-align: center;
   font-size: 30px;
   font-weight: bold;
+}
+
+.power-bar {
+  background-color: white;
+  border: 2px solid black;
+  
 }

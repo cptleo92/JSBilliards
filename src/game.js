@@ -27,15 +27,22 @@ class Game {
 
     this.play();
     this.updateTracker();
+
+    // setInterval(() => {
+    //   console.log('cue pos: ' + this.cue.pos)
+    //   console.log('cue vel: ' + this.cue.vel)
+    // }, 500);
   }
 
   play() {  
     const clickToHit = (e) => {  
       if (this.cue.canBeHit && this.waitForHit) {
-        this.cue.calcHit(e);
-        this.waitForHit = false;    
-        this.stick.visible = false;  
-      };
+        this.stick.rotating = false;
+        this.cue.calcHit(e, () => {        
+          this.waitForHit = false;        
+          this.stick.visible = false;
+        });
+      }
     }      
     this.canvas.addEventListener("click", clickToHit);    
   }
@@ -100,6 +107,7 @@ class Game {
     this.updateTracker();
 
     this.stick.visible = true;
+    this.stick.rotating = true;
   }
 
   switchTurn() {

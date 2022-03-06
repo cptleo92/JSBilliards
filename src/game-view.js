@@ -1,5 +1,6 @@
 const Stick = require("./stick.js")
 const Util = require("./util.js");
+const Power = require("./power.js");
 
 class GameView {
   constructor(game, ctx) {
@@ -13,7 +14,7 @@ class GameView {
   }
 
   init() {
-    requestAnimationFrame(this.animate.bind(this))
+    requestAnimationFrame(this.animate.bind(this))        
   }
 
   animate(time) {
@@ -32,7 +33,7 @@ class GameView {
     
     if (!this.game.cue.ballInHand) {
       this.game.stick.draw(this.ctx, this.game.cue);
-    }
+    }  
   }
 
   resetButton() {    
