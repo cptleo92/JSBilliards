@@ -59,7 +59,7 @@ class Ball {
   }
 
   move(timeDelta) {
-    const velScale = timeDelta / (25);
+    const velScale = timeDelta / (1000 / 60);
     let x = this.pos[0];
     let y = this.pos[1];
     let dx = this.vel[0] * velScale;
@@ -68,11 +68,11 @@ class Ball {
     this.pos = [x + dx, y + dy]; 
     
     if (dx !== 0) {
-      Math.abs(dx) < .05 ? this.vel[0] = 0 : this.vel[0] *= .992;
+      Math.abs(dx) < .05 ? this.vel[0] = 0 : this.vel[0] *= .994;
     }
 
     if (dy !== 0) {
-      Math.abs(dy) < .05 ? this.vel[1] = 0 : this.vel[1] *= .992;
+      Math.abs(dy) < .05 ? this.vel[1] = 0 : this.vel[1] *= .994;
     }
 
     if ((x > 1180 || x < 20) || (y < 20 || y > 580)) {
