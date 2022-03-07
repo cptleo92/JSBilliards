@@ -5,14 +5,29 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./dist/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
   <script type="text/javascript" src="./dist/main.js"></script>
   <title>Billiards in JS!</title>
 </head>
 <body>
-  
-  <h1>Billiards / Pool / Whatever</h1>
-  <canvas id="table"></canvas>
-  <section class="info">
+  <div class="instructions animate__animated animate__fadeInDown animate__slow">
+    <h1>Welcome to JS Billiards!</h1>
+    <p>This is your classic game of 8-ball pool. The controls are simple:</p>
+    <ul>
+      <li>If you have ball in hand, click to place the ball.</li>
+      <li>Click to set the angle. You will see the stick rotate along with your mouse position.</li>
+      <li>Click, <strong>HOLD</strong>. and <strong>RELEASE</strong> to shoot! The power of the shot corresponds with the distance from the stick to the cue ball.</li>
+    </ul>
+
+      <div class="animate-flicker hidden">Loading...</div>
+
+  </div>
+  <canvas id="table" class="hidden"></canvas>
+  <section class="info hidden">
     <section class="info-top"><p class="tracker"></p></section>
     <section class="info-bottom">
       <section class="info-bottom-left"></section>

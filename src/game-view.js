@@ -14,7 +14,22 @@ class GameView {
   }
 
   init() {
-    requestAnimationFrame(this.animate.bind(this))        
+    let table = document.getElementById("table");
+    let info = document.querySelector(".info");
+    let instructions = document.querySelector(".instructions");
+    let text = document.querySelector(".animate-flicker");
+
+    requestAnimationFrame(this.animate.bind(this))   
+
+    setTimeout(() => {
+      text.innerHTML = "Click anywhere to continue!"
+
+      window.addEventListener("click", () => {    
+        table.classList.remove("hidden");        
+        info.classList.remove("hidden");
+        instructions.classList.add("hidden");
+      }, {once: true})    
+    }, 3500);       
   }
 
   animate(time) {
