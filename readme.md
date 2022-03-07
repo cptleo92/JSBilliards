@@ -29,7 +29,7 @@ Simple start screen with instructions added, as well as a reset button that will
 
 ## Upcoming Features
 * Choices between 8-ball and 9-ball game modes
-* "Pool with Power" - special game mode where each player starts with a "power" that they may use once during the game. Powers will include:
+* "Pool with Powers" - special game mode where each player starts with a "power" that they may use once during the game. Powers will include:
   * Teleport Ball: the first ball that the cue ball comes into contact with will be removed and placed at a random location on the table. The cue ball will continue moving as if the ball was never there.
   * Blunt Tip: on your opponent's next shot, their spin will be completely random.
   * Free Scratch: you are allowed a scratch on this turn. But if the cue ball ends up in a pocket, your opponent gets ball in hand anyway.
@@ -39,12 +39,15 @@ Simple start screen with instructions added, as well as a reset button that will
 * Music/sound
 
 ## Contact Me
-Leo Cheng // (LinkedIn)[http://www.linkedin.com/in/sirleoc] // (Email)[leo.cheng92@gmail.com]
+Leo Cheng // [LinkedIn](http://www.linkedin.com/in/sirleoc) // [Email](leo.cheng92@gmail.com)
 
 ## Credits
-*Resources*
+**Resources**
+<br>
 [spicyyoghurt.com - Collision Detection Physics](https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics)
+<br>
 [jeffreythompson.org - Collision Detection](http://www.jeffreythompson.org/collision-detection/table_of_contents.php)
 
-*Art*
+**Art**
+<br>
 [Game_assets_66](https://opengameart.org/content/8-ball-pool-assets)
