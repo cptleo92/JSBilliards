@@ -48,6 +48,24 @@ class Game {
     this.canvas.addEventListener("click", clickToHit);    
   }
 
+  reset() {
+    this.waitForHit = true;
+    this.openBreak = true;    
+    this.currentPlayer = this.players[0];    
+    this.otherPlayer = this.players[1];
+    this.pocketed = null;
+    this.firstBallHit = null;
+    this.scratched = false;
+    this.over = false;
+
+    this.players.forEach( player => {
+      player.ballType = null;
+      player.lastBall = false;
+    })
+
+    this.updateTracker();
+  }
+
   update(timeDelta) {    
     this.moveBalls(timeDelta);
     this.detectCollisions();

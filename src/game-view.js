@@ -57,6 +57,7 @@ class GameView {
 
     reset.addEventListener("click", () => {
       this.table.resetTable();
+      this.game.reset();
     })
   }
 
