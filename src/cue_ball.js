@@ -53,9 +53,6 @@ class CueBall extends Ball {
     // console.log(power);  
     this.holdMouseForPower( (power) => {
       let vel = [vec[0] * power, vec[1] * power]     
-      console.log('vec before power: ' + vec)
-      console.log('vel after power: ' + vel);
-      console.log('power: ' + power)
       this.hitCue(vel, callback);          
     });
     

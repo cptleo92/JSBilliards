@@ -25,9 +25,9 @@ class Game {
     this.over = false;
 
     this.stick = new Stick(this.canvas);
-
-    this.play();
     this.updateTracker();
+    this.play();
+    
 
     // setInterval(() => {
     //   console.log('cue pos: ' + this.cue.pos)
@@ -50,9 +50,9 @@ class Game {
 
   reset() {
     this.waitForHit = true;
-    this.openBreak = true;    
-    this.currentPlayer = this.players[0];    
-    this.otherPlayer = this.players[1];
+    this.openBreak = true; 
+    this.stick.visible = true;
+    this.stick.rotating = true;
     this.pocketed = null;
     this.firstBallHit = null;
     this.scratched = false;
@@ -134,10 +134,10 @@ class Game {
   }
 
   updateTracker() {
+    const p = document.querySelector(".tracker");
     if (!this.over) {
       const player = this.currentPlayer.num;
-      const turn = this.currentPlayer.ballType;
-      const p = document.querySelector(".tracker");
+      const turn = this.currentPlayer.ballType;      
 
       if (turn === null) {
         p.innerHTML = `It is Player ${player}'s turn! Open table!`
@@ -270,13 +270,21 @@ class Game {
   }
 
   gameOver() {
+    let num = this.currentPlayer.num;
+    const p = document.querySelector(".tracker");
+
+    if (this.openBreak) {
+      p.innerHTML = `Player ${num} wins by sinking the 8 on the break!`
+      return;
+    }
+
     let type = this.currentPlayer.ballType;
     let checkBalls = this.table.pocketed.filter( ball => ball.type === type );
-    const p = document.querySelector(".tracker");
+    
     if (checkBalls.length === 7 && !this.scratched) {
-      p.innerHTML = `Player ${this.currentPlayer.num} wins!`
+      p.innerHTML = `Player ${num} wins!`
     } else {
-      p.innerHTML = `Player ${this.currentPlayer.num} loses!`
+      p.innerHTML = `Player ${num} loses!`
     }   
   }
 }

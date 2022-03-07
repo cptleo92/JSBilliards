@@ -58,6 +58,8 @@ class Table {
   }
 
   resetTable() {
+    this.resetInfo();
+
     for (const ball of this.balls) {         
       ball.resetBall();
       if (ball instanceof CueBall) {
@@ -66,6 +68,12 @@ class Table {
       }
     }
     this.positionBalls();
+  }
+
+  resetInfo() {
+    this.pocketed = [];
+    this.solidSection.innerHTML = "";
+    this.stripeSection.innerHTML = "";
   }
 
   positionBalls () { 

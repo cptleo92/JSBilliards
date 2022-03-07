@@ -1,7 +1,7 @@
 const Util = require("./util.js")
 
 class Stick {
-  constructor(cue) {    
+  constructor() {    
     this.img = new Image();
     this.img.src = 'src/assets/images/cue.png';
     this.visible = true;    
@@ -30,19 +30,7 @@ class Stick {
       ctx.rotate(Math.atan2((opposite) * -1, adjacent * -1));    
       ctx.translate(-x, -y);        
       ctx.drawImage(this.img, x + dist, y - offset);
-      ctx.restore();
-
-    //   if (this.shooting) {
-    //     if (dist >= 0) {
-    //       ctx.drawImage(this.img, x + dist, y - offset);
-    //       dist--;
-    //       console.log(dist);
-    //       if (dist <= 0) {
-    //         this.shooting = false;
-    //         this.visible = false;
-    //       }
-    //     }
-    //   }
+      ctx.restore(); 
     }      
   }
 
