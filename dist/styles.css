@@ -115,16 +115,16 @@ li {
 }
 
 .info button {
-  background-color: #4CAF50;
+  background-color: #964175;
   border-radius: 5px;
   color: white;
-  padding: 15px 32px;
+  padding: 15px 0px;
   text-align: center;
   text-decoration: none;
   display: block;
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
-  margin: 10px auto;
+  margin: 28px 10px;
 }
 
 .info p {

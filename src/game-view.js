@@ -14,6 +14,8 @@ class GameView {
   }
 
   init() {
+    this.resetButton();
+
     let table = document.getElementById("table");
     let info = document.querySelector(".info");
     let instructions = document.querySelector(".instructions");
@@ -23,11 +25,10 @@ class GameView {
 
     setTimeout(() => {
       text.innerHTML = "Click anywhere to continue!"
-
       window.addEventListener("click", () => {    
         table.classList.remove("hidden");        
         info.classList.remove("hidden");
-        instructions.classList.add("hidden");
+        instructions.classList.add("hidden");    
       }, {once: true})    
     }, 3500);       
   }
@@ -52,9 +53,7 @@ class GameView {
   }
 
   resetButton() {    
-    const reset = document.createElement("button");   
-    reset.innerHTML = "Reset Table";
-    this.info.appendChild(reset);
+    const reset = document.querySelector("button");   
 
     reset.addEventListener("click", () => {
       this.table.resetTable();

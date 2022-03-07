@@ -22,6 +22,7 @@ class Game {
     this.pocketed = null;
     this.firstBallHit = null;
     this.scratched = false;
+    this.over = false;
 
     this.stick = new Stick(this.canvas);
 
@@ -69,11 +70,11 @@ class Game {
     let checkBalls = this.table.pocketed.filter(ball => ball.type === this.currentPlayer.ballType)
     if (checkBalls.length === 7) {
       this.currentPlayer.lastBall = true
-      console.log(`Player ${this.currentPlayer.num} is on the 8!`)
     };
 
-    if (!this.balls[8].onTable) {
+    if (!this.balls[8].onTable && !this.over) {
       this.gameOver();
+      this.over = true;
     }
 
     this.checkScratch();
@@ -81,9 +82,7 @@ class Game {
       this.cue.handleScratch();     
       this.resolveTurn(true);
     } else if (this.pocketed !== null) {   
-        let type = this.pocketed.type;
-        console.log(`pocketed ${type}`)
-
+        let type = this.pocketed.type;        
         if (this.openBreak && type !== 'white') {
           this.assignType(type);
           this.openBreak = false;           
@@ -117,14 +116,18 @@ class Game {
   }
 
   updateTracker() {
-    const player = this.currentPlayer.num;
-    const turn = this.currentPlayer.ballType;
-    const p = document.querySelector(".tracker");
+    if (!this.over) {
+      const player = this.currentPlayer.num;
+      const turn = this.currentPlayer.ballType;
+      const p = document.querySelector(".tracker");
 
-    if (turn === null) {
-      p.innerHTML = `It is Player ${player}'s turn! Open table!`
-    } else {
-      p.innerHTML = `It is Player ${player}'s turn! You are ${turn}.`
+      if (turn === null) {
+        p.innerHTML = `It is Player ${player}'s turn! Open table!`
+      } else if (this.currentPlayer.lastBall) {
+        p.innerHTML = `It is Player ${player}'s turn! Sink the 8 to win!`
+      } else {
+        p.innerHTML = `It is Player ${player}'s turn! You are ${turn}.`
+      }
     }
   }
 
@@ -251,11 +254,11 @@ class Game {
   gameOver() {
     let type = this.currentPlayer.ballType;
     let checkBalls = this.table.pocketed.filter( ball => ball.type === type );
-    console.log(checkBalls);
+    const p = document.querySelector(".tracker");
     if (checkBalls.length === 7 && !this.scratched) {
-      alert(`Player ${this.currentPlayer.num} wins!`)
+      p.innerHTML = `Player ${this.currentPlayer.num} wins!`
     } else {
-      alert(`Player ${this.currentPlayer.num} loses!`)
+      p.innerHTML = `Player ${this.currentPlayer.num} loses!`
     }   
   }
 }

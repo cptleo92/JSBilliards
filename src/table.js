@@ -60,7 +60,10 @@ class Table {
   resetTable() {
     for (const ball of this.balls) {         
       ball.resetBall();
-      if (ball instanceof CueBall) {ball.handleBallInHand()}
+      if (ball instanceof CueBall) {
+        ball.behindTheLine = true;
+        ball.handleBallInHand()
+      }
     }
     this.positionBalls();
   }
