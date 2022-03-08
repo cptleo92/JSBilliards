@@ -2,7 +2,7 @@
 
 [Try the demo here!](https://cptleo92.github.io/JSBilliards/)
 
-![Screenshot of demo](src/assets/images/screenshot.png)
+![Screenshot of demo](src/assets/images/pool-demo.gif)
 
 Fun fact: the names *billiards* and *pool* are generally used interchangeably these days, but they in fact refer to different variations of the table game, much like snooker is a completely different game. I believe this game is technically called pocket billiards.
 
