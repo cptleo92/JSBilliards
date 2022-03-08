@@ -61,7 +61,7 @@ class CueBall extends Ball {
   holdMouseForPower(callback) {   
     let increasing = true; 
     const minPower = 1;
-    const maxPower = 50;
+    const maxPower = 40;
     const increment = 2;   
     
     const powerCounter = () => {

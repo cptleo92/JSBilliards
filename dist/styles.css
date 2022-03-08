@@ -118,13 +118,19 @@ li {
   background-color: #964175;
   border-radius: 5px;
   color: white;
-  padding: 15px 0px;
+  padding: 15px 5px;
   text-align: center;
   text-decoration: none;
   display: block;
-  font-size: 20px;
+  font-size: 15px;
   cursor: pointer;
-  margin: 28px 10px;
+  margin: 10px;
+  margin-top: 15px;
+}
+
+.info button:hover {
+  background-color: #75305b;
+  transition: 200ms;
 }
 
 .info p {
@@ -132,4 +138,18 @@ li {
   font-size: 35px;
   font-family: serif;
   font-weight: bold;
+}
+
+.socials {
+  display: flex;
+  opacity: 50%;
+}
+
+.socials img:hover {
+  opacity: 50%;
+  transition: 200ms;
+}
+
+.socials img {
+  padding-left: 12px;
 }
