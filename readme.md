@@ -47,6 +47,8 @@ Leo Cheng // [LinkedIn](http://www.linkedin.com/in/sirleoc) // [Email](leo.cheng
 [spicyyoghurt.com - Collision Detection Physics](https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics)
 <br>
 [jeffreythompson.org - Collision Detection](http://www.jeffreythompson.org/collision-detection/table_of_contents.php)
+<br>
+[Animate.css](http://animate.style)
 
 **Art**
 <br>
